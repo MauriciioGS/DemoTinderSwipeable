@@ -131,15 +131,15 @@ fun SwipeCardExample(modifier: Modifier) {
                     .zIndex((images.size + i).toFloat()),
                 cardData = images[imageIndex],
                 onSwipeLeft = { cardData ->
-                    println("onSwipeLeft")
+                    println("onSwipeLeft, cardData.id=${cardData.id}")
                     iconStates[cardData.id] = true to false
                 },
                 onSwipeRight = { cardData ->
-                    println("onSwipeRight")
+                    println("onSwipeRight, cardData.id=${cardData.id}")
                     iconStates[cardData.id] = false to true
                 },
                 onDragEnd = { cardData, dismiss ->
-                    println("onDragEnd callback, dismiss: $dismiss")
+                    println("onDragEnd callback, cardData.id=${cardData.id}")
                     println("Icon states onDragEnd before: ${iconStates[cardData.id]}")
                     iconStates[cardData.id] = false to false
                     println("Icon states onDragEnd after: ${iconStates[cardData.id]}")
@@ -191,6 +191,7 @@ fun SwipeCard(
     var offset by remember { mutableFloatStateOf(0f) }
     var dismissRight by remember { mutableStateOf(false) }
     var dismissLeft by remember { mutableStateOf(false) }
+    var dragEnd by remember { mutableStateOf(false) }
     val density = LocalDensity.current.density
 
     LaunchedEffect(dismissRight) {
@@ -204,6 +205,15 @@ fun SwipeCard(
         if (dismissLeft) {
             onSwipeLeft.invoke(cardData)
             dismissLeft = false
+        }
+    }
+
+    LaunchedEffect(dragEnd) {
+        if (dragEnd) {
+            onDragEnd.invoke(cardData, dismissLeft || dismissRight)
+            dismissLeft = false
+            dismissRight = false
+            dragEnd = false
         }
     }
     var dragStarted by remember { mutableStateOf(false) }
@@ -220,9 +230,7 @@ fun SwipeCard(
                     println("<------------------- On drag end")
                     dragStarted = false
                     offset = 0f
-                    onDragEnd(cardData, dismissLeft || dismissRight)
-                    dismissLeft = false
-                    dismissRight = false
+                    dragEnd = true
                 }
             ) { change, dragAmount ->
                 if (dragStarted) {
