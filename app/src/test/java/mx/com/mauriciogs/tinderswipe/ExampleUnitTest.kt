@@ -1,4 +1,4 @@
-package com.isodev.tinderui
+package mx.com.mauriciogs.tinderswipe
 
 import org.junit.Test
 

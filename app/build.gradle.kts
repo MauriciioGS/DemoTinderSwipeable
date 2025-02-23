@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "com.isodev.tinderui"
+    namespace = "mx.com.mauriciogs.tinderswipe"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.isodev.tinderui"
+        applicationId = "mx.com.mauriciogs.tinderswipe"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

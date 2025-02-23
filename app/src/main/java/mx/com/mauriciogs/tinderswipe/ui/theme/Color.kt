@@ -1,4 +1,4 @@
-package com.isodev.tinderui.ui.theme
+package mx.com.mauriciogs.tinderswipe.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

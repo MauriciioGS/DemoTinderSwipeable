@@ -13,9 +13,8 @@
         android:theme="@style/Theme.TinderUi"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="mx.com.mauriciogs.tinderswipe.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.TinderUi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
